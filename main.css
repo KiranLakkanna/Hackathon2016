@@ -1,0 +1,75 @@
+
+html, body {
+    font-family: 'Roboto', 'Helvetica', sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+
+#intro-wrap {
+    position: relative;
+    z-index: 1;
+    /*border-left: 25px solid rgba(0,0,0,.7);*/
+    width: 200px;
+    visibility: hidden;
+}
+/*#contentWrap{
+  /!*background: rgba(0,0,0,.8);*!/
+  padding: 15px 40px 25px 30px;
+}*/
+
+#intro-wrap h1 {
+    font-family: "PT Sans Narrow";
+    font-size: 25px;
+    color: #fff;
+    font-weight: 700;
+    margin-bottom: 0px !important;
+    padding-bottom: 10px;
+}
+
+#intro-wrap p {
+    line-height: 19px;
+
+
+}
+.open-intro,
+.close-intro {
+    /*position:absolute;*/
+    left:200px;
+    cursor: pointer;
+    width: 25px;
+    height: 25px;
+    z-index: 50;
+    padding-left:15px;
+}
+.open-intro {
+    display: none;
+
+    /* background: yellow*/
+}
+
+
+.nav-pills>li>a {
+    border-radius: 4px;
+    font-weight: bold;
+}
+.nav>li>a:focus, .nav>li>a:hover {
+    text-decoration: none;
+    background-color: #337ab7;
+    color:white;
+}
+
+/*.navbar-default .navbar-collapse, .navbar-default .navbar-form {
+  border-color: #e7e7e7;
+  background-color: #337ab7;
+}
+
+.navbar-default .navbar-nav>li>a {
+  color: white;
+}*/
+
+.carousel-inner > .item > img,
+.carousel-inner > .item > a > img {
+    width: 100%;
+    margin: auto;
+}

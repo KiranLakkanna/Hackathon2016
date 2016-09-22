@@ -1,9 +1,16 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Geolocation</title>
-  <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
   <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Example of Bootstrap 3 Static Navbar</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+  <link rel="stylesheet" type="text/css" href="main.css">
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
+  <script src="scripts.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
   <style>
     html, body {
       height: 100%;
@@ -11,11 +18,144 @@
       padding: 0;
     }
     #map {
-      height: 100%;
+      height: 50%;
+      width: 50%;
+    }
+    .bs-example{
+      margin: 20px;
     }
   </style>
 </head>
 <body>
+<div class="bs-example">
+  <nav role="navigation" class="navbar navbar-default navbar-static-top ">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <!-- <button type="button" data-target="#navbarCollapse" data-toggle="collapse" class="navbar-toggle">
+         <span class="sr-only">Toggle navigation</span>
+         <span class="icon-bar"></span>
+         <span class="icon-bar"></span>
+         <span class="icon-bar"></span>
+       </button>-->
+      <div style="float:left;top: 21px;">
+        <div class="open-intro" >
+          <span style="color: #337ab7;top: 21px;" class="glyphicon glyphicon-menu-hamburger"></span>
+        </div>
+        <div class="close-intro">
+          <span style="color: #337ab7;top: 21px;" class="glyphicon glyphicon-menu-hamburger"></span>
+        </div>
+      </div>
+
+      <a  class="navbar-brand" href="http://disputebills.com <http://disputebills.com/> ">
+        <img src="./images/tesco.gif">
+      </a>
+
+
+    </div>
+    <!-- Collection of nav links and other content for toggling -->
+    <!--    <div id="navbarCollapse" class="collapse navbar-collapse">
+          <ul class="nav navbar-nav navbar-left">
+            <li>
+          <div class="open-intro">
+            <span style="color: #337ab7;" class="glyphicon glyphicon-menu-hamburger">Menu</span>
+          </div>
+          <div class="close-intro">
+            <span style="color: #337ab7;" class="glyphicon glyphicon-menu-hamburger">Menu</span>
+          </div>
+            </li>
+          </ul>-->
+    <!-- <ul class="nav navbar-nav navbar-right">
+       <li></li>
+     </ul>-->
+</div>
+</nav>
+<!-- <button id="hide" style="margin-top: 5%" onclick="hide()">click</button>-->
+<div>
+  <div id="intro-wrap" style="float:left">
+    <div style="margin-top: 6%; margin-left: 0" class="container">
+      <div class="row">
+        <div class="col-md-3">
+          <ul  class="nav nav-pills nav-stacked" >
+            <li><a href="#"><span style="color:red" class="glyphicon glyphicon-home"></span> Home</a></li>
+            <li><a href="#"><span style="color:red" class="glyphicon glyphicon-heart"></span> Favourites & Lists</a></li>
+            <li><a href="#"><span style="color:red" class="glyphicon glyphicon-calendar"></span> Book a slot</a></li>
+            <li><a href="#"><span style="color:red" class="glyphicon glyphicon-shopping-cart"></span> My Orders</a></li>
+            <li><a href="#"><span style="color:red" class="glyphicon glyphicon-gift"></span> Special Offers</a></li>
+            <li><a href="#"><span style="color:red" class="glyphicon glyphicon-map-marker"></span> Store Locator</a></li>
+          </ul>
+        </div>
+        <div class="clearfix visible-lg"></div>
+      </div>
+    </div>
+  </div>
+
+  <div style="display:inline;max-width:80%;float:right" class="container">
+    <br>
+    <div id="myCarousel" style="max-width: 70%;"class="carousel slide" data-ride="carousel">
+      <!-- Indicators -->
+      <ol class="carousel-indicators">
+        <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+        <li data-target="#myCarousel" data-slide-to="1"></li>
+        <li data-target="#myCarousel" data-slide-to="2"></li>
+        <li data-target="#myCarousel" data-slide-to="3"></li>
+      </ol>
+
+      <!-- Wrapper for slides -->
+      <div class="carousel-inner" role="listbox">
+
+
+        <div class="item active">
+          <img src="./images/vegetables.jpg" alt="Chania" width="460" height="300">
+        </div>
+
+        <div class="item ">
+          <img src="./images/choco.jpg" alt="Chania" width="460" height="300">
+        </div>
+
+        <div class="item">
+          <img src="./images/chips.jpg" alt="Flower" width="460" height="300">
+        </div>
+        <div class="item">
+          <img src="./images/food.jpg" alt="Flower" width="460" height="300">
+        </div>
+
+
+      </div>
+
+      <!-- Left and right controls -->
+      <!-- <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+         <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+         <span class="sr-only">Previous</span>
+       </a>
+       <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+         <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+         <span class="sr-only">Next</span>
+       </a>-->
+    </div>
+  </div>
+
+</div>
+<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
+  Launch demo modal
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button  type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">You are Special to TESCO.. We have something for you</h4>
+      </div>
+      <div id ="offerMsg" class="modal-body">
+      </div>
+      <div class="modal-footer">
+
+      </div>
+    </div>
+  </div>
+</div>
+</div>
 <div id="map"></div>
 <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js">
 </script>
@@ -24,21 +164,17 @@
   // prompted by your browser. If you see the error "The Geolocation service
   // failed.", it means you probably did not give permission for the browser to
   // locate you.
-
   function initMap() {
     var map = new google.maps.Map(document.getElementById('map'), {
-      center: {lat: -34.397, lng: 150.644},
-      zoom: 6
-    }),
+              center: {lat: -34.397, lng: 150.644},
+              zoom: 6
+            }),
             directionsService = new google.maps.DirectionsService,
             directionsDisplay = new google.maps.DirectionsRenderer({
               map: map
             }),
             pointB=new google.maps.LatLng(12.999707,77.665443);
-
     //var infoWindow = new google.maps.InfoWindow({map: map});
-
-
     // Try HTML5 geolocation.
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(function(position) {
@@ -57,14 +193,13 @@
           label: "B",
           map: map
         });
-       /* marker.addListener('click', function() {
-          infowindow.open(map, marker);
-        });*/
-
+        /* marker.addListener('click', function() {
+         infowindow.open(map, marker);
+         });*/
         //infoWindow.setPosition(pos);
         //infoWindow.setContent('Location found.');
         map.setCenter(pos);
-		findTescoStores();
+        findTescoStores();
         calculateAndDisplayRoute(directionsService, directionsDisplay, pos, pointB);
       }, function() {
         handleLocationError(true, infoWindow, map.getCenter());
@@ -74,16 +209,12 @@
       handleLocationError(false, infoWindow, map.getCenter());
     }
   }
-
   function handleLocationError(browserHasGeolocation, infoWindow, pos) {
     infoWindow.setPosition(pos);
     infoWindow.setContent(browserHasGeolocation ?
             'Error: The Geolocation service failed.' :
             'Error: Your browser doesn\'t support geolocation.');
   }
-
-
-
   function calculateAndDisplayRoute(directionsService, directionsDisplay, pointA, pointB) {
     directionsService.route({
       origin: pointA,
@@ -101,20 +232,20 @@
       }
     });
   }
-  
+
   function findTescoStores(){
-	$(document).ready(function($) {
-		$.ajax({
-			url: 'https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=12.955909,77.715686&radius=5000&name=tesco+stores&key=AIzaSyDE2jTMpK7F6JomRIxb93_pDDPYW9VYTZs',
-			dataType: 'json',
-			success: function(r) {
-				console.log('success', r);
-			},
-			error: function(e){
-				console.log('error', e);
-			}			
-		});
-	})
+    $(document).ready(function($) {
+      $.ajax({
+        url: 'https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=12.955909,77.715686&radius=5000&name=tesco+stores&key=AIzaSyDE2jTMpK7F6JomRIxb93_pDDPYW9VYTZs',
+        dataType: 'json',
+        success: function(r) {
+          console.log('success', r);
+        },
+        error: function(e){
+          console.log('error', e);
+        }
+      });
+    })
   }
 </script>
 <script async defer
