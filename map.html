@@ -18,10 +18,15 @@
             padding: 0;
         }
         #map {
-            height: 50%;
-            margin: 0 auto;
-            text-align: left;
-            width: 600px;
+            height: 80%;
+            top: 0%;
+            left: 2%;
+            width: 95%;
+           /* margin: 0 auto;
+            text-align: left;*/
+           /* float:left;
+            margin-left: 14%;
+            width: 1200px;*/
         }
         .bs-example{
             margin: 20px;
@@ -89,49 +94,23 @@
     </div>
 </div>
 <!-- <button id="hide" style="margin-top: 5%" onclick="hide()">click</button>-->
+<span style="cursor:pointer;float: right" class="glyphicon glyphicon-chevron-left " onclick="openNav()"></span>
+<div id="mySidenav" class="sidenav">
+</div>
+
+<!--<span style="font-size:30px;cursor:pointer;float: right" onclick="openNav()">&#9776; open</span>-->
 <div id="map" ></div>
-<div class="list-group" style="height: 50%;padding-top: 2%;
-         margin: 0 auto;
-         text-align: left;
-         width: 600px;"><div id="storesList"></div></div>
+<script>
+    function openNav() {
+        document.getElementById("mySidenav").style.width = "328px";
+    }
 
-<!--<div class="list-group" style="height: 50%;padding-top: 2%;
-         margin: 0 auto;
-         text-align: left;
-         width: 600px;">
-    <div>
-        <a href="#" class="list-group-item active">
-            <h4 class="list-group-item-heading">First List Group Item Heading</h4>
-            <p class="list-group-item-text">List Group Item Text</p>
-        </a>
-        <a href="#" class="list-group-item">
-            <h4 class="list-group-item-heading">Second List Group Item Heading</h4>
-            <p class="list-group-item-text">List Group Item Text</p>
-        </a>
-        <a href="#" class="list-group-item">
-            <h4 class="list-group-item-heading">Third List Group Item Heading</h4>
-            <p class="list-group-item-text">List Group Item Text</p>
-        </a>
-    </div>
-</div>-->
+    function closeNav() {
+        document.getElementById("mySidenav").style.width = "0";
+    }
+</script>
 
-   <!-- <div class="list-group" style="height: 50%;padding-top: 2%;
-         margin: 0 auto;
-         text-align: left;
-         width: 600px;">
-        <a href="#" class="list-group-item active">
-            <h4 class="list-group-item-heading">First List Group Item Heading</h4>
-            <p class="list-group-item-text">List Group Item Text</p>
-        </a>
-        <a href="#" class="list-group-item">
-            <h4 class="list-group-item-heading">Second List Group Item Heading</h4>
-            <p class="list-group-item-text">List Group Item Text</p>
-        </a>
-        <a href="#" class="list-group-item">
-            <h4 class="list-group-item-heading">Third List Group Item Heading</h4>
-            <p class="list-group-item-text">List Group Item Text</p>
-        </a>
-    </div>-->
+<!--<div class="list-group" ><div id="storesList"></div></div>-->
 
 <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js">
 </script>
@@ -266,7 +245,20 @@
                     };
                     send.push(final);
                     i++;
-                    console.log("Send", send);
+                    console.log(send)
+                    var arr = send;
+                    var htmlElements = ' <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>';
+                    for (var j = 0; j < arr.length; j++) {
+                        var a=1;
+                        if(a<=5){
+                           var  bubble = '<span style="color:red;font-size: 20px;margin-left: -11%;" class="glyphicon glyphicon-map-marker"></span>'
+                        }else{
+                             bubble = '<span style="color:blue;font-size: 20px;margin-left: -11%;" class="glyphicon glyphicon-map-marker"></span>'
+                        }
+                        htmlElements += '<a href="#" id='+arr[j].name+' class="list-group-item ">'+bubble+' <div style="font-size: 14px;font-weight: bold;" class="list-group-item-heading">'+arr[j].name+'</div><div id="list" style="font-weight: bold;font-size: 14px;color:#5a9d00;right:0;">&nbsp;&nbsp;'+arr[j].duration+'</div></a>';
+                    }
+                    var storesList = document.getElementById("mySidenav");
+                    storesList.innerHTML = htmlElements;
                 }
                 return send;
             } else {

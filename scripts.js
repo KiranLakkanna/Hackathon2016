@@ -66,13 +66,7 @@ $(document).ready(function() {
 if(document.getElementById('myImage')!==null){
     document.getElementById('myImage').src = imageSource;
 }
-    var arr = ["Bangalore", "Mysore",'Mangalore','MANIPAL'];
-    var htmlElements = "";
-    for (var i = 0; i < arr.length; i++) {
-        htmlElements += ' <a href="#" id='+arr[i].toLowerCase()+' class="list-group-item active"> <h4 class="list-group-item-heading">'+arr[i]+'</h4> <p class="list-group-item-text">List Group Item Text</p> </a>';
-    }
-    var storesList = document.getElementById("storesList");
-    storesList.innerHTML = htmlElements;
-    console.log(htmlElements)
+
+
 });
 
