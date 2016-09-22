@@ -209,13 +209,7 @@
                             "name": r.results[i].name
                         };
                         nameAnd.push(nameAndDensity);
-                       /* var marker = new google.maps.Marker({
-                            position: markerLatlng,
-                            label: r.results[i].name,
-                            title: r.results[i].name
-                        });
-                        marker.item = item; // store information of each item in marker
-                        marker.setMap(map);*/ // where `map` is the instance of Google Map
+
                         trafficMarkerIcon(markerLatlng,r.results[i].name,i,map)
                     }
                     gettimeanddistance(arr, nameAnd);
@@ -300,7 +294,6 @@
         //marker.setMap(map);
 
     }
-
 
 
 </script>
