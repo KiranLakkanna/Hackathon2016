@@ -167,13 +167,14 @@
                             "name": r.results[i].name
                         };
                         nameAnd.push(nameAndDensity);
-                        var marker = new google.maps.Marker({
+                     /*   var marker = new google.maps.Marker({
                             position: markerLatlng,
                             label: r.results[i].name,
                             title: r.results[i].name
                         });
                         marker.item = item; // store information of each item in marker
-                        marker.setMap(map); // where `map` is the instance of Google Map
+                        marker.setMap(map)*!/;*/ // where `map` is the instance of Google Map
+                        trafficMarkerIcon(markerLatlng,r.results[i].name,i,map)
                     }
                     gettimeanddistance(arr, nameAnd);
                     console.log("Success", r);
@@ -218,7 +219,27 @@
             }
         })
     }
+    function trafficMarkerIcon(pos,title,traffic,map){
+        var icon;
+        if(traffic<=3){
+            icon="http://maps.google.com/mapfiles/ms/icons/green-dot.png";
+        }else if(traffic>3&&traffic<=6){
+            icon="http://maps.google.com/mapfiles/ms/icons/yellow-dot.png";
+        }else{
+            icon="http://maps.google.com/mapfiles/ms/icons/red-dot.png";
+        }
 
+        var marker = new google.maps.Marker({
+            position: pos,
+            label: title,
+            title: title,
+            icon:icon,
+            map:map
+        });
+        // marker.item = item; // store information of each item in marker
+        //marker.setMap(map);
+
+    }
 
 
 </script>
