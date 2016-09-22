@@ -182,7 +182,7 @@
             console.log(response);
             if (status == google.maps.DirectionsStatus.OK) {
                 directionsDisplay.setDirections(response);
-                console.log(directionsDisplay.setDirections(response));
+
             } else {
                 window.alert('Directions request failed due to ' + status);
             }
@@ -223,10 +223,11 @@
     }
     function gettimeanddistance(arr, nameAndDensity){
         var send = [];
+        var coordinates = arr;
         var service = new google.maps.DistanceMatrixService();
         service.getDistanceMatrix({
             origins: [{lat: 51.776362, lng: -0.221038}],
-            destinations: arr,
+            destinations: coordinates,
             travelMode: google.maps.TravelMode.DRIVING,
             unitSystem: google.maps.UnitSystem.METRIC,
             avoidHighways: false,
@@ -245,15 +246,18 @@
                         "duration": duration,
                         "name": name,
                         "density": density,
-                        "vicinity": response.destinationAddresses[i]
+                        "vicinity": response.destinationAddresses[i],
+                        "origin":coordinates[i]
+
                     };
                     send.push(final);
                     i++;
 
-                    console.log(send)
                     var arr = send;
                     var htmlElements = ' <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>';
                     for (var j = 0; j < arr.length; j++) {
+                        var lati = arr[j].origin.lat;
+                        var longi = arr[j].origin.lng;
                         var densityCount=arr[j].density;
                         if(densityCount<=3){
                            var  bubble = '<span style="color:green;font-size: 20px;margin-left: -11%;" class="glyphicon glyphicon-map-marker"></span>'
@@ -262,7 +266,7 @@
                         }else{
                             bubble = '<span style="color:red;font-size: 20px;margin-left: -11%;" class="glyphicon glyphicon-map-marker"></span>'
                         }
-                        htmlElements += '<a href="#" id='+arr[j].name+' class="list-group-item ">'+bubble+' <div style="font-size: 14px;font-weight: bold;" class="list-group-item-heading">'+arr[j].name+'</div><div id="list" style="font-weight: bold;font-size: 14px;color:#5a9d00;right:0;">&nbsp;&nbsp;'+arr[j].duration+'</div></a>';
+                        htmlElements += '<a href="#" id='+lati+'b'+longi+' class="list-group-item ">'+bubble+' <div style="font-size: 14px;font-weight: bold;" class="list-group-item-heading">'+arr[j].name+'</div><div id="list" style="font-weight: bold;font-size: 14px;color:#5a9d00;right:0;">&nbsp;&nbsp;'+arr[j].duration+'</div></a>';
                     }
                     var storesList = document.getElementById("mySidenav");
                     storesList.innerHTML = htmlElements;
