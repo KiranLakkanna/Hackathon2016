@@ -99,8 +99,8 @@
     // locate you.
     function initMap() {
         var map = new google.maps.Map(document.getElementById('map'), {
-                    center: {lat: -34.397, lng: 150.644},
-                    zoom: 6
+                    center: {lat: 51.776362, lng: -0.221038},
+                    zoom: 15
                 }),
                 directionsService = new google.maps.DirectionsService,
                 directionsDisplay = new google.maps.DirectionsRenderer({
@@ -131,9 +131,10 @@
                  });*/
                 //infoWindow.setPosition(pos);
                 //infoWindow.setContent('Location found.');
-                map.setCenter(pos);
-                findTescoStores();
-                calculateAndDisplayRoute(directionsService, directionsDisplay, pos, pointB);
+                //map.setCenter(pos);
+                findTescoStores(map);
+
+                //calculateAndDisplayRoute(directionsService, directionsDisplay, pos, pointB);
             }, function() {
                 handleLocationError(true, infoWindow, map.getCenter());
             });
@@ -166,13 +167,30 @@
         });
     }
 
-    function findTescoStores(){
+    function findTescoStores(map){
+        var arr = [];
+        var names = [];
         $(document).ready(function($) {
             $.ajax({
-                url: 'https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=12.955909,77.715686&radius=5000&name=tesco+stores&key=AIzaSyDE2jTMpK7F6JomRIxb93_pDDPYW9VYTZs',
+                url: 'https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=51.776362,-0.221038&radius=5000&name=tesco+extra&key=AIzaSyDE2jTMpK7F6JomRIxb93_pDDPYW9VYTZs',
                 dataType: 'json',
                 success: function(r) {
-                    console.log('success', r);
+                    for (var i = 0; i < r.results.length; i++) {
+                        var item = r.results[i].geometry.location;
+                        var markerLatlng = new google.maps.LatLng(item.lat, item.lng);
+                        var latAndLong = {"lat": item.lat, "lng": item.lng};
+                        arr.push(latAndLong);
+                        names.push(r.results[i].name);
+                        var marker = new google.maps.Marker({
+                            position: markerLatlng,
+                            label: r.results[i].name,
+                            title: r.results[i].name
+                        });
+                        marker.item = item; // store information of each item in marker
+                        marker.setMap(map); // where `map` is the instance of Google Map
+                    }
+                    gettimeanddistance(arr, names);
+                    console.log("Success", r);
                 },
                 error: function(e){
                     console.log('error', e);
@@ -180,6 +198,42 @@
             });
         })
     }
+    function gettimeanddistance(arr, names){
+        var send = [];
+        var service = new google.maps.DistanceMatrixService();
+        service.getDistanceMatrix({
+            origins: [{lat: 51.776362, lng: -0.221038}],
+            destinations: arr,
+            travelMode: google.maps.TravelMode.DRIVING,
+            unitSystem: google.maps.UnitSystem.METRIC,
+            avoidHighways: false,
+            avoidTolls: false
+        }, function (response, status) {
+            if (status == google.maps.DistanceMatrixStatus.OK && response.rows[0].elements[0].status != "ZERO_RESULTS") {
+                var i = 0;
+                console.log("Response", response);
+                while(response.rows[0].elements[i]!== "") {
+                    var distance = response.rows[0].elements[i].distance.text;
+                    var duration = response.rows[0].elements[i].duration.text;
+                    var name = names[i];
+                    var final = {
+                        "distance": distance,
+                        "duration": duration,
+                        "name": name
+                    };
+                    send.push(final);
+                    i++;
+                    console.log("Send", send);
+                }
+                return send;
+            } else {
+                alert("Unable to find the distance via road.");
+            }
+        })
+    }
+
+
+
 </script>
 <script async defer
         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAimxuIpdP3gQLQoVO2b8j6UzRXREAZtvQ&callback=initMap">
