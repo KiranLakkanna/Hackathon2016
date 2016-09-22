@@ -22,8 +22,7 @@ $(document).ready(function() {
 
     $('.open-intro').click(function () {
 
-        $('#intro-wrap').css('visibility', 'visible');
-
+        $('#intro-wrap').css('display', 'block');
         $('#intro-wrap').animate({
             //opacity: 1,
             left: '0',
@@ -37,6 +36,7 @@ $(document).ready(function() {
 
 
     $('.close-intro').click(function () {
+        $('#intro-wrap').css('display', 'none');
         $('#intro-wrap').animate({
             //opacity: 0.25,
             left: '-225',
@@ -48,25 +48,31 @@ $(document).ready(function() {
     });
 
 
-    console.log(HistoryInfo)
     var arr = Object.keys(HistoryInfo).map(function (key) {
         return HistoryInfo[key];
     });
     var min = Math.min.apply(null, arr);
     var max = Math.max.apply(null, arr);
-    console.log(max)
+
     var key = Object.keys(HistoryInfo).filter(function (key) {
         return HistoryInfo[key] === max
     })[0];
-    console.log(key)
+
     var offerCategory = SpecialOffers[key].msg
-    console.log(SpecialOffers[key].imag)
+
     document.getElementById("offerMsg").innerText = offerCategory
     var imageSource = SpecialOffers[key].imag
     $('#offerMsg').append('<div style="display:inline;max-width:80%;float:right" class="container"> <br> <div id="myCarouse2" style="max-width: 70%;"class="carousel slide" data-ride="carousel"><ol class="carousel-indicators"><li data-target="#myCarouse2" data-slide-to="0" class="active"></li> <li data-target="#myCarousel" data-slide-to="1"></li> <li data-target="#myCarouse2" data-slide-to="2"></li> <li data-target="#myCarouse2" data-slide-to="3"></li> </ol> <div class="carousel-inner" role="listbox"> <div class="item active"> <img src="./images/vegetables.jpg" alt="Chania" width="460" height="300"> </div> <div class="item "> <img src="./images/choco.jpg" alt="Chania" width="460" height="300"> </div> <div class="item"><img src="./images/chips.jpg" alt="Flower" width="460" height="300"> </div> <div class="item"> <img src="./images/food.jpg" alt="Flower" width="460" height="300"> </div> </div> <a class="left carousel-control" href="#myCarouse2" role="button" data-slide="prev"><span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span> <span class="sr-only">Previous</span> </a> <a class="right carousel-control" href="#myCarouse2" role="button" data-slide="next"> <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span> <span class="sr-only">Next</span> </a> </div> </div>');
 if(document.getElementById('myImage')!==null){
     document.getElementById('myImage').src = imageSource;
 }
-
+    var arr = ["Bangalore", "Mysore",'Mangalore','MANIPAL'];
+    var htmlElements = "";
+    for (var i = 0; i < arr.length; i++) {
+        htmlElements += ' <a href="#" id='+arr[i].toLowerCase()+' class="list-group-item active"> <h4 class="list-group-item-heading">'+arr[i]+'</h4> <p class="list-group-item-text">List Group Item Text</p> </a>';
+    }
+    var storesList = document.getElementById("storesList");
+    storesList.innerHTML = htmlElements;
+    console.log(htmlElements)
 });
 
