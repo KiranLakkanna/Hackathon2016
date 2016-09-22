@@ -134,10 +134,10 @@
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(function(position) {
                 var pos = {
-                    lat: position.coords.latitude,
-                    lng: position.coords.longitude
+                    lat: 51.792139,
+                    lng: -0.318951
                 };
-                var markerA = new google.maps.Marker({
+                /*var markerA = new google.maps.Marker({
                     position: pos,
                     map: map,
                     title: 'you are here'
@@ -147,7 +147,7 @@
                     title: "point B",
                     label: "B",
                     map: map
-                });
+                });*/
                 /* marker.addListener('click', function() {
                  infowindow.open(map, marker);
                  });*/
@@ -198,6 +198,11 @@
                 url: 'https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=51.792139,-0.318951&radius=5000&name=tesco+extra&key=AIzaSyDE2jTMpK7F6JomRIxb93_pDDPYW9VYTZs',
                 dataType: 'json',
                 success: function(r) {
+                    var markerA = new google.maps.Marker({
+                        position: {lat: 51.792139, lng: -0.318951},
+                        map: map,
+                        title: 'you are here'
+                    });
                     for (var i = 0; i < r.results.length; i++) {
                         var item = r.results[i].geometry.location;
                         var markerLatlng = new google.maps.LatLng(item.lat, item.lng);
@@ -223,10 +228,11 @@
     }
     function gettimeanddistance(arr, nameAndDensity){
         var send = [];
+        var coordinates = arr;
         var service = new google.maps.DistanceMatrixService();
         service.getDistanceMatrix({
             origins: [{lat: 51.776362, lng: -0.221038}],
-            destinations: arr,
+            destinations: coordinates,
             travelMode: google.maps.TravelMode.DRIVING,
             unitSystem: google.maps.UnitSystem.METRIC,
             avoidHighways: false,
@@ -234,7 +240,7 @@
         }, function (response, status) {
             if (status == google.maps.DistanceMatrixStatus.OK && response.rows[0].elements[0].status != "ZERO_RESULTS") {
                 var i = 0;
-                console.log("Response", response);
+                console.log("Response", response.destinationAddresses);
                 while(response.rows[0].elements[i]!== "") {
                     var distance = response.rows[0].elements[i].distance.text;
                     var duration = response.rows[0].elements[i].duration.text;
@@ -244,12 +250,13 @@
                         "distance": distance,
                         "duration": duration,
                         "name": name,
-                        "density": density
+                        "density": density,
+                        "vicinity": response.destinationAddresses[i],
+                        "origin": coordinates[i]
                     };
                     send.push(final);
                     i++;
-
-                    console.log(send)
+                    console.log(send);
                     var arr = send;
                     var htmlElements = ' <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>';
                     for (var j = 0; j < arr.length; j++) {
