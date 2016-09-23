@@ -279,7 +279,7 @@
                     send.push(final);
                     i++;
                     var arr = send;
-                    var htmlElements = ' <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>';
+                    var htmlElements = ' <div><div class="square"></div><p style="display: inline;"> Free</p><div class="square2"></div><p style="display: inline;"> Moderate</p><div class="square3"></div><p style="display: inline;"> Busy</p></div><a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>';
                     for (var j = 0; j < arr.length; j++) {
                         var lati = arr[j].origin.lat;
                         var longi = arr[j].origin.lng;
@@ -291,7 +291,7 @@
                         }else{
                             bubble = '<span style="color:red;font-size: 20px;margin-left: -11%;" class="glyphicon glyphicon-map-marker"></span>'
                         }
-                        htmlElements += '<a href="#" onclick="showIt(this.id)" id='+lati+'b'+longi+' class="list-group-item ">'+bubble+' <div style="font-size: 14px;font-weight: bold;" class="list-group-item-heading">'+arr[j].name+'</div><div id="list" style="font-weight: bold;font-size: 14px;color:#5a9d00;right:0;">&nbsp;&nbsp;'+arr[j].duration+'</div></a>';
+                        htmlElements += '<a href="#" id='+lati+'b'+longi+' class="list-group-item ">'+bubble+' <div style="font-size: 14px;font-weight: bold;" class="list-group-item-heading">'+arr[j].name+'</div><div id="list" style="font-weight: bold;font-size: 14px;color:#5a9d00;right:0;">&nbsp;&nbsp;'+arr[j].duration+'</div><div style="font-size: 11px;width: 200px;max-width: 200px;">'+arr[j].vicinity+'</div><div id="list1" style="font-weight: bold; font-size: 16px;right:0">'+arr[j].distance+'</div></a>';
                     }
                     var storesList = document.getElementById("mySidenav");
                     storesList.innerHTML = htmlElements;
