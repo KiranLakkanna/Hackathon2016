@@ -51,6 +51,8 @@
                 <img src="./images/tesco.gif">
             </a>
 
+           
+
 
         </div>
 
@@ -69,6 +71,7 @@
         <!-- <ul class="nav navbar-nav navbar-right">
            <li></li>
          </ul>-->
+
     </nav>
 </div>
 
@@ -247,7 +250,7 @@
         });
         setTimeout(function () {
             $("#delay2").click();
-        }, 5000)
+        }, 10000)
         directionsService = new google.maps.DirectionsService,
                 directionsDisplay = new google.maps.DirectionsRenderer({
                     map: map
@@ -292,9 +295,9 @@
                         var lati = arr[j].origin.lat;
                         var longi = arr[j].origin.lng;
                         var densityCount=arr[j].density;
-                        if(densityCount<=3){
+                        if(densityCount<=2){
                            var  bubble = '<span style="color:green;font-size: 20px;margin-left: -11%;" class="glyphicon glyphicon-map-marker"></span>'
-                        }else if(densityCount>3 && densityCount<=6){
+                        }else if(densityCount>2 && densityCount<=4){
                              bubble = '<span style="color:yellow;font-size: 20px;margin-left: -11%;" class="glyphicon glyphicon-map-marker"></span>'
                         }else{
                             bubble = '<span style="color:red;font-size: 20px;margin-left: -11%;" class="glyphicon glyphicon-map-marker"></span>'
@@ -312,9 +315,9 @@
     }
     function trafficMarkerIcon(pos,title,traffic,map){
         var icon;
-        if(traffic<=3){
+        if(traffic<=2){
             icon="http://maps.google.com/mapfiles/ms/icons/green-dot.png";
-        }else if(traffic>3&&traffic<=6){
+        }else if(traffic>2&&traffic<=4){
             icon="http://maps.google.com/mapfiles/ms/icons/yellow-dot.png";
         }else{
             icon="http://maps.google.com/mapfiles/ms/icons/red-dot.png";
@@ -338,7 +341,7 @@
         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAimxuIpdP3gQLQoVO2b8j6UzRXREAZtvQ&callback=initMap">
 </script>
 
-<button id="delay2" style="height:0;width:0;" data-toggle="modal" data-target="#myModal2">
+<button id="delay2" style="height:0;width:0;visibility: hidden" data-toggle="modal" data-target="#myModal2">
 </button>
 
 
