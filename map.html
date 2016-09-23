@@ -123,12 +123,12 @@
         var map = new google.maps.Map(document.getElementById('map'), {
                     center: {lat: 51.792139, lng: -0.318951},
                     zoom: 12
-                }),
-                directionsService = new google.maps.DirectionsService,
+                });
+                /*directionsService = new google.maps.DirectionsService,
                 directionsDisplay = new google.maps.DirectionsRenderer({
                     map: map
                 }),
-                pointB=new google.maps.LatLng(12.999707,77.665443);
+                pointB=new google.maps.LatLng(12.999707,77.665443);*/
         //var infoWindow = new google.maps.InfoWindow({map: map});
         // Try HTML5 geolocation.
         if (navigator.geolocation) {
@@ -179,7 +179,6 @@
             avoidHighways: false,
             travelMode: google.maps.TravelMode.DRIVING
         }, function (response, status) {
-            console.log(response);
             if (status == google.maps.DirectionsStatus.OK) {
                 directionsDisplay.setDirections(response);
 
@@ -226,6 +225,29 @@
             });
         })
     }
+    function showIt(clicked_id) {
+
+        var values = clicked_id.split('b');
+        var latitude = parseFloat(values[0]);
+        var longitude = parseFloat(values[1]);
+        var pos = {
+            lat: 51.792139,
+            lng: -0.318951
+        };
+        var dest = {
+            lat: latitude,
+            lng: longitude
+        };
+        var map = new google.maps.Map(document.getElementById('map'), {
+            center: {lat: 51.792139, lng: -0.318951},
+            zoom: 12
+        });
+        directionsService = new google.maps.DirectionsService,
+                directionsDisplay = new google.maps.DirectionsRenderer({
+                    map: map
+                }),
+        calculateAndDisplayRoute(directionsService, directionsDisplay, pos, dest);
+    }
     function gettimeanddistance(arr, nameAndDensity){
         var send = [];
         var coordinates = arr;
@@ -269,11 +291,10 @@
                         }else{
                             bubble = '<span style="color:red;font-size: 20px;margin-left: -11%;" class="glyphicon glyphicon-map-marker"></span>'
                         }
-                        htmlElements += '<a href="#" id='+lati+'b'+longi+' class="list-group-item ">'+bubble+' <div style="font-size: 14px;font-weight: bold;" class="list-group-item-heading">'+arr[j].name+'</div><div id="list" style="font-weight: bold;font-size: 14px;color:#5a9d00;right:0;">&nbsp;&nbsp;'+arr[j].duration+'</div></a>';
+                        htmlElements += '<a href="#" onclick="showIt(this.id)" id='+lati+'b'+longi+' class="list-group-item ">'+bubble+' <div style="font-size: 14px;font-weight: bold;" class="list-group-item-heading">'+arr[j].name+'</div><div id="list" style="font-weight: bold;font-size: 14px;color:#5a9d00;right:0;">&nbsp;&nbsp;'+arr[j].duration+'</div></a>';
                     }
                     var storesList = document.getElementById("mySidenav");
                     storesList.innerHTML = htmlElements;
-
                 }
                 return send;
             } else {

@@ -96,6 +96,12 @@ html, body {
     display: block;
     transition: 0.3s
 }
+
+.sidenav a:focus{
+    background-color: #337ab7;
+}
+
+
 .sidenav div{
     display:inline-block;
     width: 200px;
