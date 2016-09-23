@@ -86,7 +86,7 @@
                     <li><a href="#"><span style="color:red" class="glyphicon glyphicon-calendar"></span> Book a slot</a></li>
                     <li><a href="#"><span style="color:red" class="glyphicon glyphicon-shopping-cart"></span> My Orders</a></li>
                     <li><a href="#"><span style="color:red" class="glyphicon glyphicon-gift"></span> Special Offers</a></li>
-                    <li><a href="/map.html"><span style="color:red" class="glyphicon glyphicon-map-marker"></span> Store Locator</a></li>
+                    <li><a href="/map.html"><span style="color:red" class="glyphicon glyphicon-map-marker"></span> How busy is your Store?</a></li>
                 </ul>
             </div>
             <div class="clearfix visible-lg"></div>
@@ -123,12 +123,12 @@
         var map = new google.maps.Map(document.getElementById('map'), {
                     center: {lat: 51.792139, lng: -0.318951},
                     zoom: 12
-                }),
-                directionsService = new google.maps.DirectionsService,
+                });
+                /*directionsService = new google.maps.DirectionsService,
                 directionsDisplay = new google.maps.DirectionsRenderer({
                     map: map
                 }),
-                pointB=new google.maps.LatLng(12.999707,77.665443);
+                pointB=new google.maps.LatLng(12.999707,77.665443);*/
         //var infoWindow = new google.maps.InfoWindow({map: map});
         // Try HTML5 geolocation.
         if (navigator.geolocation) {
@@ -179,7 +179,6 @@
             avoidHighways: false,
             travelMode: google.maps.TravelMode.DRIVING
         }, function (response, status) {
-            console.log(response);
             if (status == google.maps.DirectionsStatus.OK) {
                 directionsDisplay.setDirections(response);
 
@@ -226,6 +225,37 @@
             });
         })
     }
+
+
+    function showIt(clicked_id) {
+
+       var save = true;
+        var values = clicked_id.split('b');
+        var latitude = parseFloat(values[0]);
+        var longitude = parseFloat(values[1]);
+        var pos = {
+            lat: 51.792139,
+            lng: -0.318951
+        };
+        var dest = {
+            lat: latitude,
+            lng: longitude
+        };
+        var map = new google.maps.Map(document.getElementById('map'), {
+            center: {lat: 51.792139, lng: -0.318951},
+            zoom: 12
+        });
+        setTimeout(function () {
+            $("#delay2").click();
+        }, 5000)
+        directionsService = new google.maps.DirectionsService,
+                directionsDisplay = new google.maps.DirectionsRenderer({
+                    map: map
+                }),
+
+        calculateAndDisplayRoute(directionsService, directionsDisplay, pos, dest);
+
+    }
     function gettimeanddistance(arr, nameAndDensity){
         var send = [];
         var coordinates = arr;
@@ -257,7 +287,7 @@
                     send.push(final);
                     i++;
                     var arr = send;
-                    var htmlElements = ' <div><div class="square"></div><p style="display: inline;"> Free</p><div class="square2"></div><p style="display: inline;"> Moderate</p><div class="square3"></div><p style="display: inline;"> Busy</p></div><a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>';
+                    var htmlElements = ' <div><div style="font-weight: bold;color: #ea416e;margin-left: 5%;font-size: 18px;padding-bottom: 9%;">How busy is your Store?</div><div class="square"></div><p style="display: inline;"> Free</p><div class="square2"></div><p style="display: inline;"> Moderate</p><div class="square3"></div><p style="display: inline;"> Busy</p></div><a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>';
                     for (var j = 0; j < arr.length; j++) {
                         var lati = arr[j].origin.lat;
                         var longi = arr[j].origin.lng;
@@ -269,11 +299,10 @@
                         }else{
                             bubble = '<span style="color:red;font-size: 20px;margin-left: -11%;" class="glyphicon glyphicon-map-marker"></span>'
                         }
-                        htmlElements += '<a href="#" id='+lati+'b'+longi+' class="list-group-item ">'+bubble+' <div style="font-size: 14px;font-weight: bold;" class="list-group-item-heading">'+arr[j].name+'</div><div id="list" style="font-weight: bold;font-size: 14px;color:#5a9d00;right:0;">&nbsp;&nbsp;'+arr[j].duration+'</div><div style="font-size: 11px;width: 200px;max-width: 200px;">'+arr[j].vicinity+'</div><div id="list1" style="font-weight: bold; font-size: 16px;right:0">'+arr[j].distance+'</div></a>';
+                        htmlElements += '<a href="#" onclick="showIt(this.id)" id='+lati+'b'+longi+' class="list-group-item ">'+bubble+' <div style="font-size: 14px;font-weight: bold;" class="list-group-item-heading">'+arr[j].name+'</div><div id="list" style="font-weight: bold;font-size: 14px;color:#5a9d00;right:0;">&nbsp;&nbsp;'+arr[j].duration+'</div><div style="font-size: 11px;width: 200px;max-width: 200px;">'+arr[j].vicinity+'</div><div id="list1" style="font-weight: bold; font-size: 16px;right:0">'+arr[j].distance+'</div></a>';
                     }
                     var storesList = document.getElementById("mySidenav");
                     storesList.innerHTML = htmlElements;
-
                 }
                 return send;
             } else {
@@ -309,11 +338,12 @@
         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAimxuIpdP3gQLQoVO2b8j6UzRXREAZtvQ&callback=initMap">
 </script>
 
-
+<button id="delay2" style="height:0;width:0;" data-toggle="modal" data-target="#myModal2">
+</button>
 
 
 <!-- Modal -->
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+<div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">

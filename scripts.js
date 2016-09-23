@@ -71,6 +71,7 @@ $(document).ready(function () {
     document.getElementById('myImage').src = imageSource;
     $('#delay').on('click', function (e) {
         var $target = $($(this).data('target'));
+        console.log($target)
         $target.data('triggered',true);
         setTimeout(function() {
             if ($target.data('triggered')) {
